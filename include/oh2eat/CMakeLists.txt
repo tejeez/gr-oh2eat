@@ -23,5 +23,6 @@
 install(FILES
     api.h
     int8_to_complex.h
-    stream_to_vector_overlap.h DESTINATION include/oh2eat
+    stream_to_vector_overlap.h
+    sum_vectors_ff.h DESTINATION include/oh2eat
 )

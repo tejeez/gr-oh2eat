@@ -22,5 +22,6 @@
 ########################################################################
 install(FILES
     api.h
-    int8_to_complex.h DESTINATION include/oh2eat
+    int8_to_complex.h
+    stream_to_vector_overlap.h DESTINATION include/oh2eat
 )

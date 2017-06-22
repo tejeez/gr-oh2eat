@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<block>
+        <name>Stream to Vector, overlapped</name>
+        <key>oh2eat_stream_to_vector_overlap</key>
+        <category>[oh2eat]</category>
+        <import>import oh2eat</import>
+        <make>oh2eat.stream_to_vector_overlap($type.size, $vecsize, $every_n_items)</make>
+        <!-- some copy-paste from blocks_stream_to_vector.xml -->
+	<param>
+		<name>IO Type</name>
+		<key>type</key>
+		<type>enum</type>
+		<option>
+			<name>Complex</name>
+			<key>complex</key>
+			<opt>size:gr.sizeof_gr_complex</opt>
+		</option>
+		<option>
+			<name>Float</name>
+			<key>float</key>
+			<opt>size:gr.sizeof_float</opt>
+		</option>
+		<option>
+			<name>Int</name>
+			<key>int</key>
+			<opt>size:gr.sizeof_int</opt>
+		</option>
+		<option>
+			<name>Short</name>
+			<key>short</key>
+			<opt>size:gr.sizeof_short</opt>
+		</option>
+		<option>
+			<name>Byte</name>
+			<key>byte</key>
+			<opt>size:gr.sizeof_char</opt>
+		</option>
+	</param>
+	<param>
+		<name>Output vector size</name>
+		<key>vecsize</key>
+		<value>16</value>
+		<type>int</type>
+	</param>
+	<param>
+		<name>Every N input items</name>
+		<key>every_n_items</key>
+		<value>10</value>
+		<type>int</type>
+	</param>
+	<check>$vecsize &gt; 0</check>
+	<check>$every_n_items &gt; 0</check>
+	<sink>
+		<name>in</name>
+		<type>$type</type>
+	</sink>
+	<source>
+		<name>out</name>
+		<type>$type</type>
+		<vlen>$vecsize</vlen>
+	</source>
+</block>

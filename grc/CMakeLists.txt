@@ -18,5 +18,6 @@
 # Boston, MA 02110-1301, USA.
 
 install(FILES
-    oh2eat_int8_to_complex.xml DESTINATION share/gnuradio/grc/blocks
+    oh2eat_int8_to_complex.xml
+    oh2eat_stream_to_vector_overlap.xml DESTINATION share/gnuradio/grc/blocks
 )

@@ -27,6 +27,7 @@ link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND oh2eat_sources
     int8_to_complex_impl.cc
+    stream_to_vector_overlap_impl.cc
 )
 
 set(oh2eat_sources "${oh2eat_sources}" PARENT_SCOPE)

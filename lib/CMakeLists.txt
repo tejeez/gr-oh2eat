@@ -26,6 +26,7 @@ include_directories(${Boost_INCLUDE_DIR})
 link_directories(${Boost_LIBRARY_DIRS})
 
 list(APPEND oh2eat_sources
+    int8_to_complex_impl.cc
 )
 
 set(oh2eat_sources "${oh2eat_sources}" PARENT_SCOPE)

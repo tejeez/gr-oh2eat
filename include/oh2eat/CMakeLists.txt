@@ -22,5 +22,5 @@
 ########################################################################
 install(FILES
     api.h
-    DESTINATION include/oh2eat
+    int8_to_complex.h DESTINATION include/oh2eat
 )

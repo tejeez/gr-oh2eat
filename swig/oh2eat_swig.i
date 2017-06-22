@@ -8,6 +8,9 @@
 %include "oh2eat_swig_doc.i"
 
 %{
+#include "oh2eat/int8_to_complex.h"
 %}
 
 
+%include "oh2eat/int8_to_complex.h"
+GR_SWIG_BLOCK_MAGIC2(oh2eat, int8_to_complex);

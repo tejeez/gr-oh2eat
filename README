@@ -1,0 +1,7 @@
+This GNU Radio module is a collection of random small blocks for things
+I always seem to need but can't find in the standard blocks.
+Another purpose of the block is to let me learn more about GNU Radio.
+I couldn't find a good name for this module. Since every programmer probably
+has their own module like this, I decided to just name it by my ham callsign
+to avoid name collisions.
+

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<block>
+  <name>Moving average over vector</name>
+  <key>oh2eat_vec_mov_avg_ff</key>
+  <category>[oh2eat]</category>
+  <import>import oh2eat</import>
+  <make>oh2eat.vec_mov_avg_ff($vecsize, $length)</make>
+  <!-- Make one 'param' node for every Parameter you want settable from the GUI.
+       Sub-nodes:
+       * name
+       * key (makes the value accessible as $keyname, e.g. in the make node)
+       * type -->
+  <param>
+    <name>Vec Length</name>
+    <key>vecsize</key>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Length</name>
+    <key>length</key>
+    <type>int</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>float</type>
+    <vlen>$vecsize</vlen>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>float</type>
+    <vlen>$vecsize</vlen>
+  </source>
+</block>

@@ -16,9 +16,9 @@
 # along with GNU Radio; see the file COPYING.  If not, write to
 # the Free Software Foundation, Inc., 51 Franklin Street,
 # Boston, MA 02110-1301, USA.
-
 install(FILES
     oh2eat_int8_to_complex.xml
     oh2eat_stream_to_vector_overlap.xml
-    oh2eat_sum_vectors_ff.xml DESTINATION share/gnuradio/grc/blocks
+    oh2eat_sum_vectors_ff.xml
+    oh2eat_vec_mov_avg_ff.xml DESTINATION share/gnuradio/grc/blocks
 )

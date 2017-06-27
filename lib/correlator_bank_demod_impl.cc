@@ -53,6 +53,7 @@ namespace gr {
       int alignment = volk_get_alignment();
       int alignment_items = alignment / sizeof(gr_complex);
       if(alignment_items > 1) set_alignment(alignment_items);
+      set_history(corr_len);
 
       // aligned length of correlators
       corr_len_a = (corr_len + alignment_items - 1) / alignment_items * alignment_items;
@@ -64,7 +65,7 @@ namespace gr {
       for(int c = 0; c < corr_num; c++) {
         gr_complex *correlator = correlators + c*corr_len_a;
         for(int i = 0; i < corr_len; i++) {
-          correlator[i] = corrs[c*corr_len + i];
+          correlator[i] = std::conj(corrs[c*corr_len + i]);
         }
       }
     }

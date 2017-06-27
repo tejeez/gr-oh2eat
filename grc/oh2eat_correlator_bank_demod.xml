@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<block>
+  <name>Correlator bank demod</name>
+  <key>oh2eat_correlator_bank_demod</key>
+  <category>[oh2eat]</category>
+  <import>import oh2eat</import>
+  <make>oh2eat.correlator_bank_demod($sps, $corr_num, $corr_len, $corrs)</make>
+
+  <param>
+    <name>Samples per symbol</name>
+    <key>sps</key>
+    <value>samples_per_symbol</value>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Number of correlators</name>
+    <key>corr_num</key>
+    <value>2**symbols_in_window</value>
+    <type>int</type>
+  </param>
+  
+  <param>
+    <name>Correlator length</name>
+    <key>corr_len</key>
+    <value>samples_per_symbol*(symbols_in_window+1)</value>
+    <type>int</type>
+  </param>
+
+  <param>
+    <name>Correlators</name>
+    <key>corrs</key>
+    <value>oh2eat.gfsk_bank(samples_per_symbol, 0.65, 0.5, samples_per_symbol*(symbols_in_window+1), symbols_in_window, 2)</value>
+    <type>complex_vector</type>
+  </param>
+
+  <sink>
+    <name>in</name>
+    <type>complex</type>
+  </sink>
+
+  <source>
+    <name>out</name>
+    <type>byte</type>
+  </source>
+</block>

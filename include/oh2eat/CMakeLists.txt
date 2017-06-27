@@ -25,5 +25,6 @@ install(FILES
     int8_to_complex.h
     stream_to_vector_overlap.h
     sum_vectors_ff.h
-    vec_mov_avg_ff.h DESTINATION include/oh2eat
+    vec_mov_avg_ff.h
+    correlator_bank_demod.h DESTINATION include/oh2eat
 )

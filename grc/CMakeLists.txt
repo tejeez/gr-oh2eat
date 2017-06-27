@@ -20,5 +20,6 @@ install(FILES
     oh2eat_int8_to_complex.xml
     oh2eat_stream_to_vector_overlap.xml
     oh2eat_sum_vectors_ff.xml
-    oh2eat_vec_mov_avg_ff.xml DESTINATION share/gnuradio/grc/blocks
+    oh2eat_vec_mov_avg_ff.xml
+    oh2eat_correlator_bank_demod.xml DESTINATION share/gnuradio/grc/blocks
 )

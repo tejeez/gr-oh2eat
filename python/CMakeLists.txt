@@ -31,7 +31,7 @@ endif()
 GR_PYTHON_INSTALL(
     FILES
     __init__.py
-    DESTINATION ${GR_PYTHON_DIR}/oh2eat
+    gfsk_bank.py DESTINATION ${GR_PYTHON_DIR}/oh2eat
 )
 
 ########################################################################
@@ -45,3 +45,4 @@ GR_ADD_TEST(qa_int8_to_complex ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/
 GR_ADD_TEST(qa_stream_to_vector_overlap ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_stream_to_vector_overlap.py)
 GR_ADD_TEST(qa_sum_vectors_ff ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_sum_vectors_ff.py)
 GR_ADD_TEST(qa_vec_mov_avg_ff ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_vec_mov_avg_ff.py)
+GR_ADD_TEST(qa_correlator_bank_demod ${PYTHON_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/qa_correlator_bank_demod.py)

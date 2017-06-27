@@ -28,7 +28,8 @@ list(APPEND oh2eat_sources
     int8_to_complex_impl.cc
     stream_to_vector_overlap_impl.cc
     sum_vectors_ff_impl.cc
-    vec_mov_avg_ff_impl.cc )
+    vec_mov_avg_ff_impl.cc
+    correlator_bank_demod_impl.cc )
 
 set(oh2eat_sources "${oh2eat_sources}" PARENT_SCOPE)
 if(NOT oh2eat_sources)

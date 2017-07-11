@@ -4,7 +4,25 @@
   <key>oh2eat_sum_vectors_ff</key>
   <category>[oh2eat]</category>
   <import>import oh2eat</import>
-  <make>oh2eat.sum_vectors_ff($vecsize, $decimation, $scale)</make>
+  <!-- The same code works for complex vectors if we just specify
+       a twice as big vector size and pretend they are floats. -->
+  <make>oh2eat.sum_vectors_ff($vecsize * $type.size_in_floats, $decimation, $scale)</make>
+
+  <param>
+    <name>Type</name>
+    <key>type</key>
+    <type>enum</type>
+    <option>
+      <name>Float</name>
+      <key>float</key>
+      <opt>size_in_floats:1</opt>
+    </option>
+    <option>
+      <name>Complex</name>
+      <key>complex</key>
+      <opt>size_in_floats:2</opt>
+    </option>
+  </param>
 
   <param>
     <name>Vec Length</name>
@@ -29,13 +47,13 @@
 
   <sink>
     <name>in</name>
-    <type>float</type>
+    <type>$type</type>
     <vlen>$vecsize</vlen>
   </sink>
 
   <source>
     <name>out</name>
-    <type>float</type>
+    <type>$type</type>
     <vlen>$vecsize</vlen>
   </source>
 </block>

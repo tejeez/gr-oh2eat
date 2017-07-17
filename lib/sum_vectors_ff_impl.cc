@@ -50,7 +50,7 @@ namespace gr {
       d_vecbytes = sizeof(float)*vecsize;
 
       int alignment = volk_get_alignment();
-      int alignment_items = alignment / sizeof(float);
+      int alignment_items = alignment / (sizeof(float)*vecsize);
       if(alignment_items > 1) set_alignment(alignment_items);
       //accumulator = (float*)volk_malloc(sizeof(float) * vecsize, alignment);
     }

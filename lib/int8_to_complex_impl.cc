@@ -40,10 +40,12 @@ namespace gr {
      */
     int8_to_complex_impl::int8_to_complex_impl(int input_type)
       : gr::sync_decimator("int8_to_complex",
-              gr::io_signature::make(1, 1, sizeof(uint8_t)),
-              gr::io_signature::make(1, 1, sizeof(gr_complex)), 2)
+              gr::io_signature::make(1, 1, input_type < 2 ? 1 : 2),
+              gr::io_signature::make(1, 1, sizeof(gr_complex)),
+              input_type < 2 ? 2 : 1),
+        d_input_type(input_type)
     {
-      d_input_type = input_type;
+      assert(input_type >= 0 && input_type <= 3);
     }
 
     /*
@@ -59,7 +61,7 @@ namespace gr {
         gr_vector_void_star &output_items)
     {
       gr_complex *out = (gr_complex *) output_items[0];
-      if(d_input_type) {
+      if(d_input_type == 1 || d_input_type == 3) {
         // signed
         const int8_t *in = (const int8_t *) input_items[0];
         for(int i=0; i<noutput_items; i++) {

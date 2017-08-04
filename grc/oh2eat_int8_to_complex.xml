@@ -12,15 +12,27 @@
     <option>
       <name>Unsigned (e.g. RTL-SDR)</name>
       <key>0</key>
+      <opt>item_type:byte</opt>
     </option>
     <option>
       <name>Signed (e.g. HackRF)</name>
       <key>1</key>
+      <opt>item_type:byte</opt>
+    </option>
+    <option>
+      <name>Unsigned, 2 bytes/item</name>
+      <key>2</key>
+      <opt>item_type:short</opt>
+    </option>
+    <option>
+      <name>Signed, 2 bytes/item</name>
+      <key>3</key>
+      <opt>item_type:short</opt>
     </option>
   </param>
   <sink>
     <name>in</name>
-    <type>byte</type>
+    <type>$input_type.item_type</type>
   </sink>
 
   <source>

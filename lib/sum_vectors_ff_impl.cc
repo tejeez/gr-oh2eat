@@ -42,17 +42,23 @@ namespace gr {
     sum_vectors_ff_impl::sum_vectors_ff_impl(size_t vecsize, int decimation, float scale)
       : gr::sync_decimator("sum_vectors_ff",
               gr::io_signature::make(1, 1, sizeof(float)*vecsize),
-              gr::io_signature::make(1, 1, sizeof(float)*vecsize), decimation)
-    {
-      d_vecsize = vecsize;
-      d_decimation = decimation;
-      d_scale = scale;
-      d_vecbytes = sizeof(float)*vecsize;
+              gr::io_signature::make(1, 1, sizeof(float)*vecsize), decimation),
+              d_vecsize(vecsize),
+              d_decimation(decimation), d_scale(scale)
 
-      int alignment = volk_get_alignment();
-      int alignment_items = alignment / (sizeof(float)*vecsize);
-      if(alignment_items > 1) set_alignment(alignment_items);
-      //accumulator = (float*)volk_malloc(sizeof(float) * vecsize, alignment);
+    {
+        d_vecbytes = sizeof(float)*vecsize;
+        int alignment = volk_get_alignment();
+
+        // use volk if vector size allows it
+        d_use_volk = ((d_vecbytes % alignment) == 0);
+
+        d_use_volk = false; // for some reason, it actually takes less cpu if volk is not used!
+
+        if(d_use_volk) {
+            int alignment_items = alignment / d_vecbytes;
+            if(alignment_items > 1) set_alignment(alignment_items);
+        }
     }
 
     /*
@@ -60,7 +66,6 @@ namespace gr {
      */
     sum_vectors_ff_impl::~sum_vectors_ff_impl()
     {
-      //volk_free(accumulator);
     }
 
     int
@@ -72,17 +77,28 @@ namespace gr {
       float *out = (float *) output_items[0];
 
       for(int n = 0; n < noutput_items; n++) {
-        const float *in1 = in + d_decimation * d_vecsize * n;
-        float *accumulator = out + d_vecsize * n;
+        float *accumulator = out;
 
-        memcpy(accumulator, in1, d_vecbytes);
+        memcpy(accumulator, in, d_vecbytes);
+        in += d_vecsize;
 
-        // can the input and output be the same array in libvolk?
-        for(int i = 1; i < d_decimation; i++)
-          volk_32f_x2_add_32f(accumulator, accumulator, in1 + d_vecsize * i, d_vecsize);
+        for(int i = 1; i < d_decimation; i++) {
+          if(d_use_volk)
+            volk_32f_x2_add_32f(accumulator, accumulator, in, d_vecsize);
+          else
+            for(int j = 0; j < d_vecsize; j++)
+              accumulator[j] += in[j];
+          in += d_vecsize;
+        }
 
         if(d_scale != 1)
-          volk_32f_s32f_multiply_32f(accumulator, accumulator, d_scale, d_vecsize);
+          if(d_use_volk)
+            volk_32f_s32f_multiply_32f(accumulator, accumulator, d_scale, d_vecsize);
+          else
+            for(int j = 0; j < d_vecsize; j++)
+              accumulator[j] *= d_scale;
+
+        out += d_vecsize;
       }
 
       // Tell runtime system how many output items we produced.

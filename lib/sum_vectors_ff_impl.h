@@ -32,7 +32,7 @@ namespace gr {
       size_t d_vecsize, d_vecbytes;
       int d_decimation;
       float d_scale;
-      //float *accumulator;
+      bool d_use_volk;
 
      public:
       sum_vectors_ff_impl(size_t vecsize, int decimation, float scale);
